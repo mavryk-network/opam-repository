@@ -1,0 +1,43 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: ["Mavryk Dynamics"]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "MIT"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "mavkit-libs" { = version }
+  "mavkit-shell-libs" { = version }
+  "uri" { >= "3.1.0" }
+  "mavkit-protocol-001-PtAtLas-libs" { = version }
+  "mavkit-protocol-002-PtBoreas-libs" { = version }
+]
+depopts: [
+  "mavryk-client-genesis"
+  "mavryk-client-demo-counter"
+  "mavkit-protocol-000-Ps9mPmXa-libs"
+  "mavkit-protocol-alpha-libs"
+]
+conflicts: [
+  "stdcompat" { < "19" }
+  "mavryk-client-genesis" { != version }
+  "mavryk-client-demo-counter" { != version }
+  "mavkit-protocol-000-Ps9mPmXa-libs" { != version }
+  "mavkit-protocol-alpha-libs" { != version }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "Mavryk: `mavkit-client` binary"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.2-rc3/mavkit-source-20.2-rc3.tar.gz"
+  checksum: [
+    "sha256=0e9d0d335630c077859d14dfddddcf67a85699bb82bd6951a100f322e0e1354a"
+    "sha512=899b345f4ea5bf3782986857ca59c11a28f5a9561333e49938c71368c9bb3006464e9b6f96d8453736a3bb28ce05745b6721fb8c6ac8bb7d9016cfdb170b1612"
+  ]
+}
