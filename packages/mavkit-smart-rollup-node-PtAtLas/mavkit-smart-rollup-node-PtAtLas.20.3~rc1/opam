@@ -1,0 +1,46 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: ["Mavryk Dynamics"]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "MIT"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "mavkit-libs" { = version }
+  "mavkit-shell-libs" { = version }
+  "mavkit-protocol-001-PtAtLas-libs" { = version }
+  "mavryk-protocol-001-PtAtLas" { = version }
+  "mavryk-dal-node-services" { = version }
+  "mavryk-dal-node-lib" { = version }
+  "mavryk-dac-lib" { = version }
+  "mavryk-dac-client-lib" { = version }
+  "mavkit-l2-libs" { = version }
+  "mavkit-crawler" { = version }
+  "data-encoding" { >= "1.0.1" & < "1.1" }
+  "mavkit-internal-libs" { = version }
+  "aches" { >= "1.0.0" }
+  "aches-lwt" { >= "1.0.0" }
+  "mavkit-injector" { = version }
+  "mavkit-smart-rollup-node-lib" { = version }
+  "mavkit-version" { = version }
+]
+conflicts: [
+  "checkseum" { = "0.5.0" }
+  "stdcompat" { < "19" }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "Protocol specific (for 001-PtAtLas) library for smart rollup node"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.3-rc1/mavkit-source-20.3-rc1.tar.gz"
+  checksum: [
+    "sha256=bd349982e7cb6e6def11c02a2a344d8fd60eeea728690f3bdd6a6de27d9bdb42"
+    "sha512=3b7869c1ab2afc5f3067f4a1ab0612bcdb1f7dc833171e32db4e56b2dd0fc256bce74a2fe07a0afee5b60440210a8a963a1cdede81ca08bf885dc6ebda67474d"
+  ]
+}
