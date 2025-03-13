@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: ["Mavryk Dynamics"]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "MIT"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "mavkit-proto-libs" { = version }
+  "mavkit-shell-libs" { = version }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "Mavryk protocol demo-counter package"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.3-rc2/mavkit-source-20.3-rc2.tar.gz"
+  checksum: [
+    "sha256=235eb16c04a4abac8f8d9bc3621d5670521b81d838441a03ba6e64af3eeaa22f"
+    "sha512=f5b594cd5ad96ea8c53c274940ccf3561fdc4b849010a3242d025b472a137ed3df3be1c25f8e1bb820070d0760366a751f88e850ba9f0bd6072a3daa7a7eeead"
+  ]
+}
