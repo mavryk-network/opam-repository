@@ -1,0 +1,41 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: ["Mavryk Dynamics"]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "MIT"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "mavkit-libs" { = version }
+  "mavkit-l2-libs" { = version }
+  "data-encoding" { >= "1.0.1" & < "1.1" }
+  "mavryk-bls12-381" { = version }
+  "zarith" { >= "1.13" & < "1.14" }
+  "zarith_stubs_js" { >= "0.16.1" }
+  "class_group_vdf" { >= "0.0.4" }
+  "aches" { >= "1.0.0" }
+  "aches-lwt" { >= "1.0.0" }
+  "tezt" { with-test & >= "4.0.0" & < "5.0.0" }
+  "mavkit-alcotezt" { with-test & = version }
+  "qcheck-alcotest" { with-test & >= "0.20" }
+  "lwt" { with-test & >= "5.7.0" }
+]
+conflicts: [
+  "stdcompat" { < "19" }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "Mavkit protocol libraries"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.3/mavkit-source-20.3.tar.gz"
+  checksum: [
+    "sha256=494d81b9f02902c54fda80d7115c859883fea7d68ddbd898bc78fe92353b3915"
+    "sha512=f3d7d83b1c94efd4c9fd3dd98938c092e0c9eeb7c274e65bfab89b058c17581ddb05b1f7ef01618f8b47a71adb97359096e8900bf59ba74b12672e07136f6470"
+  ]
+}
