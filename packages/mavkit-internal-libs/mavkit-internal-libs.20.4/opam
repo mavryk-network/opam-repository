@@ -1,0 +1,51 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: [
+  "Mavryk Dynamics"
+  "Thomas Gazagnaire"
+  "Thomas Leonard"
+  "Craig Ferguson"
+]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "ISC"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "ppx_repr" { >= "0.6.0" }
+  "logs"
+  "ppxlib"
+  "bigstringaf" { >= "0.5.0" }
+  "fmt" { >= "0.8.7" }
+  "astring"
+  "bheap" { >= "2.0.0" }
+  "digestif" { >= "0.9.0" }
+  "jsonm"
+  "lwt" { >= "5.7.0" }
+  "mtime" { >= "2.0.0" }
+  "ocamlgraph"
+  "uri" { >= "3.1.0" }
+  "uutf"
+  "repr"
+  "optint"
+  "index" { >= "1.6.0" & < "1.7.0" }
+  "cmdliner" { >= "1.1.0" }
+  "checkseum" { != "0.5.0" }
+  "rusage"
+  "mavkit-alcotezt" { = version }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "A package that contains some libraries used by the Mavkit suite"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.4/mavkit-source-20.4.tar.gz"
+  checksum: [
+    "sha256=d518140804b21b44dbbfbf73fa1b0cef89def7b40e91a4f45247f383cbed7f38"
+    "sha512=0138a39b8178da3cbb6bb641091336f5716071c06322347551bfdc581af6bc5503f02b004eaf38af0a2b3f66859185b1c5273e30e357b6acee9d395ee3c216f9"
+  ]
+}

@@ -1,0 +1,41 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: ["Mavryk Dynamics"]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "MIT"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "mavkit-libs" { = version }
+  "mavkit-shell-libs" { = version }
+  "cohttp-lwt-unix" { >= "5.2.0" }
+  "mavryk-openapi" { = version }
+  "mavkit-node-config" { = version }
+  "prometheus-app" { >= "1.2" }
+  "camlzip" { >= "1.11" & < "1.12" }
+  "tar"
+  "tar-unix" { >= "2.0.1" & < "3.0.0" }
+  "mavryk-dal-node-lib" { = version }
+  "mavryk-dac-lib" { = version }
+  "mavryk-dac-client-lib" { = version }
+  "mavkit-injector" { = version }
+  "mavkit-version" { = version }
+  "mavkit-l2-libs" { = version }
+  "mavkit-crawler" { = version }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "Mavkit: library for Smart Rollup node"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.4/mavkit-source-20.4.tar.gz"
+  checksum: [
+    "sha256=d518140804b21b44dbbfbf73fa1b0cef89def7b40e91a4f45247f383cbed7f38"
+    "sha512=0138a39b8178da3cbb6bb641091336f5716071c06322347551bfdc581af6bc5503f02b004eaf38af0a2b3f66859185b1c5273e30e357b6acee9d395ee3c216f9"
+  ]
+}

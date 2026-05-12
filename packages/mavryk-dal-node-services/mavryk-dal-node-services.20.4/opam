@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "info@mavryk.io"
+authors: ["Mavryk Dynamics"]
+homepage: "https://mavrykdynamics.com/"
+bug-reports: "https://gitlab.com/mavryk-network/mavryk-protocol/issues"
+dev-repo: "git+https://gitlab.com/mavryk-network/mavryk-protocol.git"
+license: "MIT"
+depends: [
+  "dune" { >= "3.11.1" }
+  "ocaml" { >= "4.14" }
+  "mavkit-libs" { = version }
+]
+build: [
+  ["rm" "-r" "vendors" "contrib"]
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+available: os != "win32"
+synopsis: "Mavryk: `mavryk-dal-node` RPC services"
+url {
+  src: "https://gitlab.com/mavryk-network/mavryk-protocol/-/archive/mavkit-v20.4/mavkit-source-20.4.tar.gz"
+  checksum: [
+    "sha256=d518140804b21b44dbbfbf73fa1b0cef89def7b40e91a4f45247f383cbed7f38"
+    "sha512=0138a39b8178da3cbb6bb641091336f5716071c06322347551bfdc581af6bc5503f02b004eaf38af0a2b3f66859185b1c5273e30e357b6acee9d395ee3c216f9"
+  ]
+}
